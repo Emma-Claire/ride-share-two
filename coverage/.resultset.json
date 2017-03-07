@@ -1,0 +1,29 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/Users/emmaclairephilippides/ride-share-two/lib/driver.rb": [
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/emmaclairephilippides/ride-share-two/specs/rider_spec.rb": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "/Users/emmaclairephilippides/ride-share-two/specs/trip_spec.rb": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "timestamp": 1488859135
+  }
+}
