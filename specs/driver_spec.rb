@@ -6,7 +6,7 @@ describe "RideShare::Driver" do
     data = {
       id: 123,
       vin: "12345678901234567",
-      name: "Zane Al"
+      name: "Zane Alexander"
     }
     @driver = RideShare::Driver.new(data)
 
@@ -18,14 +18,14 @@ describe "RideShare::Driver" do
 
         name = 'Zane Alexander'
         id = 123
-        vin = '12345671234567890'
+        vin = '12345678901234567'
 
         @driver.must_respond_to :id
         @driver.id.must_equal id
         @driver.must_respond_to :name
-        @driver.balance.must_equal name
+        @driver.name.must_equal name
         @driver.must_respond_to :vin
-        @driver.date.must_equal vin
+        @driver.vin.must_equal vin
       end
 
 
@@ -33,7 +33,7 @@ describe "RideShare::Driver" do
       data = {
         id: 123,
         vin: "badvin",
-        name: "Zane Al"
+        name: "Zane Alexander"
       }
 
       proc {
@@ -45,9 +45,28 @@ describe "RideShare::Driver" do
 
   describe "self.all" do
 
-    it "returns a list of all drivers from the csv" do
-
+  it "Everything in the array is an instance of driver" do
+    RideShare::Driver.all.each do |driver|
+      driver.must_be_instance_of RideShare::Driver
     end
+  end
+
+  it "The number of drivers is correct" do
+    RideShare::Driver.all.length.must_equal 100
+  end
+
+  it "Id and Balance of first and last account match" do
+    RideShare::Driver.all[0].id.must_equal(1)
+    RideShare::Driver.all[0].name.must_equal('Bernardo Prosacco')
+    RideShare::Driver.all[0].vin.must_equal('WBWSS52P9NEYLVDE9')
+    RideShare::Driver.all[-1].id.must_equal(100)
+    RideShare::Driver.all[-1].name.must_equal('Minnie Dach')
+    RideShare::Driver.all[-1].vin.must_equal('XF9Z0ST7X18WD41HT')
+  end
+
+  it "returns a list of all drivers from the csv" do
+        RideShare::Driver.all.must_be_instance_of Array
+  end
 
   end
 
@@ -58,7 +77,7 @@ describe "RideShare::Driver" do
 
   end
 
-  describe "trip_list()" do
+  describe "trip_list(id)" do
 
     it "returns an array of all the driver's trips" do
     end
