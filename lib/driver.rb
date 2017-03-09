@@ -15,15 +15,19 @@ module RideShare
       raise ArgumentError.new "VIN should be 17 characters long." if vin.length != 17
     end
 
-  def self.all
-    @drivers = []
-    CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
+    def self.all
+      @drivers = []
+      CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
         @drivers << self.new({id:line[0].to_i, name:line[1], vin:line[2]})  #need to get rid of first line
+      end
+      return @drivers
     end
-    return @drivers
-  end
 
-  def self.find(id)
+    def self.find(id)
+      drivers_lookup = Driver.all
+      return drivers_lookup.find { |driver| driver.id == id }
+    end
+
   end
 
   def trips
@@ -32,7 +36,5 @@ module RideShare
 
   def average_rating
   end
-
-end
 
 end
