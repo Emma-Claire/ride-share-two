@@ -72,6 +72,29 @@ describe "RideShare::Driver" do
 
   describe "self.find(id)" do
 
+    it "Returns an driver that exists" do
+      result = RideShare::Driver.find(86)
+      result.must_be_kind_of RideShare::Driver
+    end
+
+    it "Can find the first driver from the CSV" do
+      first_driver = RideShare::Driver.find(1)
+      first_driver.must_be_instance_of RideShare::Driver
+      first_driver.id.must_equal 1
+    end
+
+    it "Can find the last driver from the CSV" do
+      last_driver = RideShare::Driver.find(100)
+      last_driver.must_be_instance_of RideShare::Driver
+      last_driver.id.must_equal 100
+    end
+
+    it "Raises an error for an account that doesn't exist" do
+      proc{
+        Bank::Account.find(983)
+      }.must_raise ArgumentError
+    end
+
     it "looks up a driver using their id" do
     end
 
