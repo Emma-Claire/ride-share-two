@@ -2,31 +2,23 @@ require_relative 'spec_helper'
 
 describe "RideShare::Driver" do
 
-  before do
-    data = {
-      id: 123,
-      vin: "12345678901234567",
-      name: "Zane Alexander"
-    }
-    @driver = RideShare::Driver.new(data)
-
-  end
+  let(:my_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
 
   describe "Driver#initialize" do
 
-      it "Takes an ID, a name and a vin" do
+    it "Takes an ID, a name and a vin" do
 
-        name = 'Zane Alexander'
-        id = 123
-        vin = '12345678901234567'
+      name = 'Zane Alexander'
+      id = 123
+      vin = '12345678901234567'
 
-        @driver.must_respond_to :id
-        @driver.id.must_equal id
-        @driver.must_respond_to :name
-        @driver.name.must_equal name
-        @driver.must_respond_to :vin
-        @driver.vin.must_equal vin
-      end
+      my_driver.must_respond_to :id
+      my_driver.id.must_equal id
+      my_driver.must_respond_to :name
+      my_driver.name.must_equal name
+      my_driver.must_respond_to :vin
+      my_driver.vin.must_equal vin
+    end
 
 
     it "raises a Argumenterror if the VIN is not 17 characters in length" do
@@ -37,7 +29,7 @@ describe "RideShare::Driver" do
       }
 
       proc {
-        RideShare::Driver.new(data)
+        my_driver(data)
       }.must_raise ArgumentError
     end
 
@@ -45,36 +37,36 @@ describe "RideShare::Driver" do
 
   describe "self.all" do
 
-  it "Everything in the array is an instance of driver" do
-    RideShare::Driver.all.each do |driver|
-      driver.must_be_instance_of RideShare::Driver
+    it "Everything in the array is an instance of driver" do
+      RideShare::Driver.all.each do |driver|
+        driver.must_be_instance_of RideShare::Driver
+      end
     end
-  end
 
-  it "The number of drivers is correct" do
-    RideShare::Driver.all.length.must_equal 100
-  end
+    it "The number of drivers is correct" do
+      RideShare::Driver.all.length.must_equal 100
+    end
 
-  it "Id and Balance of first and last account match" do
-    RideShare::Driver.all[0].id.must_equal(1)
-    RideShare::Driver.all[0].name.must_equal('Bernardo Prosacco')
-    RideShare::Driver.all[0].vin.must_equal('WBWSS52P9NEYLVDE9')
-    RideShare::Driver.all[-1].id.must_equal(100)
-    RideShare::Driver.all[-1].name.must_equal('Minnie Dach')
-    RideShare::Driver.all[-1].vin.must_equal('XF9Z0ST7X18WD41HT')
-  end
+    it "correctly matches first and last driver data" do
+      RideShare::Driver.all[0].id.must_equal(1)
+      RideShare::Driver.all[0].name.must_equal('Bernardo Prosacco')
+      RideShare::Driver.all[0].vin.must_equal('WBWSS52P9NEYLVDE9')
+      RideShare::Driver.all[-1].id.must_equal(100)
+      RideShare::Driver.all[-1].name.must_equal('Minnie Dach')
+      RideShare::Driver.all[-1].vin.must_equal('XF9Z0ST7X18WD41HT')
+    end
 
-  it "returns a list of all drivers from the csv" do
-        RideShare::Driver.all.must_be_instance_of Array
-  end
+    it "returns a list of all drivers from the csv" do
+      RideShare::Driver.all.must_be_instance_of Array
+    end
 
   end
 
   describe "self.find" do
 
     it "Returns an existing driver" do
-      result = RideShare::Driver.find(86)
-      result.must_be_kind_of RideShare::Driver
+      existing_driver = RideShare::Driver.find(86)
+      existing_driver.must_be_kind_of RideShare::Driver
     end
 
     it "Can find the first driver from the CSV" do
@@ -95,21 +87,30 @@ describe "RideShare::Driver" do
     #   }.must_output (/.+/)
     # end
 
-    it "looks up a driver using their id" do
-    end
 
   end
 
-  describe "trip_list(id)" do
+  describe "trip.find(id)" do
 
-    it "returns an array of all the driver's trips" do
+    it "looks up trips using the driver's ID" do
+
     end
+
+    it "returns an array of all the trips of a driver" do
+    end
+
 
   end
 
   describe "average_rating" do
 
-    it "returns the average rating of driver" do
+    it "finds driver rating using the driver's ID" do
+    end
+
+    it "pushes all ratings of given driver into an array" do
+    end
+
+    it "returns the average rating of the driver" do
     end
 
   end

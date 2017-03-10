@@ -7,7 +7,8 @@ module RideShare
 
     attr_reader :id, :name, :vin
 
-    def initialize(driver_info) #created a driver data hash
+    def initialize(driver_info)
+
       @id = driver_info[:id]
       @name = driver_info[:name]
       @vin = driver_info[:vin]
@@ -30,11 +31,12 @@ module RideShare
 
   end
 
-  def trips
+  def self.trips
     return RideShare::Trips.get_trips_by_driver_id(@id) #this gets the list of all driver trips using driver id and calls on Trip class
   end
 
   def average_rating
+
   end
 
 end
