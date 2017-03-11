@@ -1,5 +1,8 @@
 module RideShare
   class Trip
+    
+    attr_accessor
+
     def initialize
       # has an ID, rider ID, a driver ID, date, rating
 
