@@ -1,4 +1,4 @@
-module RideSharing
+module RideShare
   class Trip
   end
 end

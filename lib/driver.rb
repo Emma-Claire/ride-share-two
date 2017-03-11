@@ -31,7 +31,7 @@ module RideShare
 
   end
 
-  def self.trips
+  def find_trips
     return RideShare::Trips.get_trips_by_driver_id(@id) #this gets the list of all driver trips using driver id and calls on Trip class
   end
 

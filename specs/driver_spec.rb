@@ -2,7 +2,11 @@ require_relative 'spec_helper'
 
 describe "RideShare::Driver" do
 
-  let(:my_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
+  let(:new_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
+
+  # let(:driver_trips) {RideShare::Driver.find_trips(5)}
+
+  let(:rating) { RideShare::Driver.average_rating(5)}
 
   describe "Driver#initialize" do
 
@@ -12,12 +16,12 @@ describe "RideShare::Driver" do
       id = 123
       vin = '12345678901234567'
 
-      my_driver.must_respond_to :id
-      my_driver.id.must_equal id
-      my_driver.must_respond_to :name
-      my_driver.name.must_equal name
-      my_driver.must_respond_to :vin
-      my_driver.vin.must_equal vin
+      new_driver.must_respond_to :id
+      new_driver.id.must_equal id
+      new_driver.must_respond_to :name
+      new_driver.name.must_equal name
+      new_driver.must_respond_to :vin
+      new_driver.vin.must_equal vin
     end
 
 
@@ -29,7 +33,7 @@ describe "RideShare::Driver" do
       }
 
       proc {
-        my_driver(data)
+        new_driver(data)
       }.must_raise ArgumentError
     end
 
@@ -97,6 +101,7 @@ describe "RideShare::Driver" do
     end
 
     it "returns an array of all the trips of a driver" do
+      
     end
 
 

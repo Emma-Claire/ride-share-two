@@ -10,6 +10,7 @@ module RideShare
     end
 
     def self.all
+
     end
 
     def self.find(id)
@@ -18,7 +19,7 @@ module RideShare
     def driver
     end
 
-    def find(trips)
+    def find_trips(rider_id)
     end
   end
 end

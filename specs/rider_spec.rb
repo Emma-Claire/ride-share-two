@@ -28,28 +28,19 @@ let(:my_rider) {RideShare::Rider.new({rider_id: 301, name: 'Zane Alexander', pho
 
   describe "self.all" do
 
-    it "returns an array and everything in the array is an instance of rider" do
-      RideShare::Rider.must_be_instance_of Array
-      RideShare::Rider.each do |rider|
+    it "returns an array with the correct info and number of riders" do
+      RideShare::Rider.all.must_be_instance_of Array
+      RideShare::Rider.all.each do |rider|
         rider.must_be_instance_of RideShare::Rider
       end
-    end
-    #
-    # it "The number of riders is correct" do
-    #   RideShare::Rider.all.length.must_equal 300
-    # end
+      RideShare::Rider.all.length.must_equal 300
 
-    # it "correctly matches first and last rider data" do
-    #   RideShare::Rider.all[0].rider_id.must_equal(1)
-    #   Rider.all[0].name.must_equal('Nina Hintz Sr.')
-    #   RideShare::Rider.all[0].phone.must_equal('560.815.3059')
-    #   RideShare::Rider.all[-1].rider_id.must_equal(300)
-    #   RideShare::Rider.all[-1].name.must_equal('Miss Isom Gleason')
-    #   RideShare::Rider.all[-1].phone.must_equal('791-114-8423 x70188')
-    # end
-
-    it "returns a list of all riders from the csv" do
-      RideShare::Rider.all.must_be_instance_of Array
+      RideShare::Rider.all[0].rider_id.must_equal(1)
+      Rider.all[0].name.must_equal('Nina Hintz Sr.')
+      RideShare::Rider.all[0].phone.must_equal('560.815.3059')
+      RideShare::Rider.all[-1].rider_id.must_equal(300)
+      RideShare::Rider.all[-1].name.must_equal('Miss Isom Gleason')
+      RideShare::Rider.all[-1].phone.must_equal('791-114-8423 x70188')
     end
 
   end
@@ -73,12 +64,11 @@ let(:my_rider) {RideShare::Rider.new({rider_id: 301, name: 'Zane Alexander', pho
       last_rider.rider_id.must_equal 300
     end
 
-    # it "Raises an error for a rider ID that doesn't exist" do
-    #   proc{
-    #     RideShare::rider.find(983)
-    #   }.must_output (/.+/)
-    # end
-
+    it "outputs a message for a rider ID that doesn't exist" do
+      proc{
+        RideShare::Rider.find(983)
+      }.must_output (/.+/)
+    end
 
   end
 
@@ -88,15 +78,15 @@ let(:my_rider) {RideShare::Rider.new({rider_id: 301, name: 'Zane Alexander', pho
 
     end
 
-    it "returns an array of all the trips of a rider" do
+    it "returns an array of all the trips taken by a specific rider" do
     end
 
 
   end
 
-  describe "driver" do
+  describe "driver.find(rider_id)" do
 
-    it "returns a list of the drivers instances" do
+    it "returns a list of the drivers instances for a specific rider" do
     end
 
   end
