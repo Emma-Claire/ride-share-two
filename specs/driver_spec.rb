@@ -4,7 +4,7 @@ describe "RideShare::Driver" do
 
   let(:new_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
 
-  # let(:driver_trips) {RideShare::Driver.find_trips(5)}
+  let(:driver_trips) {RideShare::Driver.find_trips(15)}
 
   let(:rating) { RideShare::Driver.average_rating(5)}
 
@@ -22,6 +22,10 @@ describe "RideShare::Driver" do
       new_driver.name.must_equal name
       new_driver.must_respond_to :vin
       new_driver.vin.must_equal vin
+
+      new_driver.id.must_be_kind_of Integer
+      new_driver.name.must_be_kind_of String
+      new_driver.vin.must_be_kind_of String
     end
 
 
@@ -68,6 +72,10 @@ describe "RideShare::Driver" do
 
   describe "self.find" do
 
+    it "returns nil is driver id does not exist" do
+      RideShare::Driver.find(780).must_be_nil
+    end
+
     it "Returns an existing driver" do
       existing_driver = RideShare::Driver.find(86)
       existing_driver.must_be_kind_of RideShare::Driver
@@ -85,39 +93,26 @@ describe "RideShare::Driver" do
       last_driver.id.must_equal 100
     end
 
-    # it "Raises an error for a driver ID that doesn't exist" do
-    #   proc{
-    #     RideShare::Driver.find(983)
-    #   }.must_output (/.+/)
-    # end
-
 
   end
 
-  describe "trip.find(id)" do
+  describe "trip.find(driver_id)" do
 
-    it "looks up trips using the driver's ID" do
-
+    it "returns trips using the driver's ID" do
+      driver_trips[0].trip_id.must_equal(55)
     end
 
     it "returns an array of all the trips of a driver" do
-
+      driver_trips.length.must_equal 7
     end
-
 
   end
 
   describe "average_rating" do
 
-    it "finds driver rating using the driver's ID" do
-    end
-
-    it "pushes all ratings of given driver into an array" do
-    end
-
     it "returns the average rating of the driver" do
+      rating.must_equal 3.5
     end
-
   end
 
 end

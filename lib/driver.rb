@@ -31,11 +31,11 @@ module RideShare
 
   end
 
-  def find_trips
-    return RideShare::Trips.get_trips_by_driver_id(@id) #this gets the list of all driver trips using driver id and calls on Trip class
+  def find_trips()
+    # return RideShare::Trips.get_trips_by_driver_id(@id) #this gets the list of all driver trips using driver id and calls on Trip class
   end
 
-  def average_rating
+  def average_rating()
 
   end
 
