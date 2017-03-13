@@ -4,19 +4,17 @@ describe "RideShare::Driver" do
 
   let(:new_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
 
-  let(:driver_trips) {RideShare::Driver.find(@driver_id)}
-
-  let(:rating) { RideShare::Driver.average_rating(5)}
+  let(:driver_trips) {RideShare::Driver.find(1)}
 
   describe "Driver#initialize" do
 
     it "Takes an ID, a name and a vin" do
 
       name = 'Zane Alexander'
-      id = 123
+      driver_id = 123
       vin = '12345678901234567'
 
-      new_driver.must_respond_to :id
+      new_driver.must_respond_to :driver_id
       new_driver.id.must_equal id
       new_driver.must_respond_to :name
       new_driver.name.must_equal name
@@ -31,7 +29,7 @@ describe "RideShare::Driver" do
 
     it "raises a Argumenterror if the VIN is not 17 characters in length" do
       data = {
-        id: 123,
+        driver_id: 123,
         vin: "badvin",
         name: "Zane Alexander"
       }
@@ -72,7 +70,7 @@ describe "RideShare::Driver" do
 
   describe "self.find" do
 
-    it "returns nil is driver id does not exist" do
+    it "returns nil if driver id does not exist" do
       RideShare::Driver.find(780).must_be_nil
     end
 

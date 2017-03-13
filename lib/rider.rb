@@ -21,7 +21,7 @@ module RideShare
   end
 
   def self.find(rider_id)
-    rider_lookup = Rider.all
+    rider_lookup = RiderShare::Rider.all
     rider_lookup.find { |rider| rider.rider_id == rider_id }
     puts "invalid rider id" if rider_lookup == nil
     return rider_lookup
