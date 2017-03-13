@@ -1,15 +1,14 @@
-
 require 'csv'
 
 module RideShare
 
   class Driver
 
-    attr_reader :id, :name, :vin
+    attr_reader :driver_id, :name, :vin
 
     def initialize(driver_info)
 
-      @id = driver_info[:id]
+      @driver_id = driver_info[:driver_id]
       @name = driver_info[:name]
       @vin = driver_info[:vin]
 
@@ -19,24 +18,23 @@ module RideShare
     def self.all
       @drivers = []
       CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
-        @drivers << self.new({id:line[0].to_i, name:line[1], vin:line[2]})
+        @drivers << self.new({driver_id:line[0].to_i, name:line[1], vin:line[2]})
       end
       return @drivers
     end
 
     def self.find(id)
-      drivers_lookup = Driver.all
-      return drivers_lookup.find { |driver| driver.id == id }
+      drivers_lookup = Driver.all.find { |driver| driver.driver_id == id }
+      return drivers_lookup
     end
 
+    def find_trips
+      RideShare::Trips.get_trips_by_driver_id(@driver_id)
+    end
+
+    def average_rating
+      total_rating = 0
+      average_rating = 0
+    end
   end
-
-  def find_trips()
-    # return RideShare::Trips.get_trips_by_driver_id(@id) #this gets the list of all driver trips using driver id and calls on Trip class
-  end
-
-  def average_rating()
-
-  end
-
 end

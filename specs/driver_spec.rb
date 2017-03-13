@@ -4,7 +4,7 @@ describe "RideShare::Driver" do
 
   let(:new_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
 
-  let(:driver_trips) {RideShare::Driver.find_trips(15)}
+  let(:driver_trips) {RideShare::Driver.find(@driver_id)}
 
   let(:rating) { RideShare::Driver.average_rating(5)}
 
@@ -56,10 +56,10 @@ describe "RideShare::Driver" do
     end
 
     it "correctly matches first and last driver data" do
-      RideShare::Driver.all[0].id.must_equal(1)
+      RideShare::Driver.all[0].driver_id.must_equal(1)
       RideShare::Driver.all[0].name.must_equal('Bernardo Prosacco')
       RideShare::Driver.all[0].vin.must_equal('WBWSS52P9NEYLVDE9')
-      RideShare::Driver.all[-1].id.must_equal(100)
+      RideShare::Driver.all[-1].driver_id.must_equal(100)
       RideShare::Driver.all[-1].name.must_equal('Minnie Dach')
       RideShare::Driver.all[-1].vin.must_equal('XF9Z0ST7X18WD41HT')
     end
@@ -84,16 +84,14 @@ describe "RideShare::Driver" do
     it "Can find the first driver from the CSV" do
       first_driver = RideShare::Driver.find(1)
       first_driver.must_be_instance_of RideShare::Driver
-      first_driver.id.must_equal 1
+      first_driver.must_equal 1
     end
 
     it "Can find the last driver from the CSV" do
       last_driver = RideShare::Driver.find(100)
       last_driver.must_be_instance_of RideShare::Driver
-      last_driver.id.must_equal 100
+      last_driver.must_equal 100
     end
-
-
   end
 
   describe "trip.find(driver_id)" do
@@ -111,7 +109,7 @@ describe "RideShare::Driver" do
   describe "average_rating" do
 
     it "returns the average rating of the driver" do
-      rating.must_equal 3.5
+      RideShare::Driver.average_rating.must_equal 28.0 / 8
     end
   end
 

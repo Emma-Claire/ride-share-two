@@ -16,30 +16,14 @@ module RideShare
     def self.all
       trips = []
       CSV.foreach("support/trips.csv", {:headers => true}) do |line|
-        trips << self.new({trip_id:line[0], driver_id:line[1], rider_id:line[2], date:line[3], rating:line[4]})
+        trips << self.new({trip_id:line[0].to_i, driver_id:line[1].to_i, rider_id:line[2].to_i, date:line[3], rating:line[4].to_i})
       end
       return trips
     end
 
     def self.find(trip_id)
+      trips = Trip.all
+      return trips.find {|trip| trip.trip_id == trip_id}
     end
-
-    #   def driver
-    #     # retrieve the associated driver instance through the driver ID
-    #   end
-    #
-    #   def rider
-    #     # retrieve the associated rider instance through the rider ID
-    #   end
-    #
-    #   def self.all_driver(driver_id)
-    #     # find all trip instances for a given driver ID
-    #   end
-    #
-    #   def self.all_rider(rider_id)
-    #     # find all trip instances for a given rider ID
-    #   end
-    # end
-
   end
 end

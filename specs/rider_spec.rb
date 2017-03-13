@@ -3,8 +3,6 @@ require_relative 'spec_helper'
 describe "RideShare::Rider" do
   let(:my_rider) {RideShare::Rider.new({rider_id: 15, name: 'Miss Lori Okuneva', phone: '(317) 197-0404 x7013'})}
 
-  let(:rider_trips) {RideShare::Rider.find_trips(15)}
-
   describe "rider#initialize" do
 
     it "must be an instance of Rider" do
@@ -41,7 +39,7 @@ describe "RideShare::Rider" do
       RideShare::Rider.all.length.must_equal 300
 
       RideShare::Rider.all[0].rider_id.must_equal(1)
-      Rider.all[0].name.must_equal('Nina Hintz Sr.')
+      RideShare::Rider.all[0].name.must_equal('Nina Hintz Sr.')
       RideShare::Rider.all[0].phone.must_equal('560.815.3059')
       RideShare::Rider.all[-1].rider_id.must_equal(300)
       RideShare::Rider.all[-1].name.must_equal('Miss Isom Gleason')
@@ -52,39 +50,30 @@ describe "RideShare::Rider" do
 
   describe "self.find" do
 
+
     it "Returns an existing rider" do
-      existing_rider = RideShare::Rider.find(86)
-      existing_rider.must_be_kind_of RideShare::Rider
+      RideShare::Rider.find(1).must_be_instance_of RideShare::Rider
     end
 
-    it "Can find the first rider from the CSV" do
-      first_rider = RideShare::Rider.find(1)
-      first_rider.must_be_instance_of RideShare::Rider
-      first_rider.rider_id.must_equal 1
+    it "returns the correct rider info" do
+      rider = RideShare::Rider.find(1)
+      rider.name.must_equal "Nina Hintz Sr."
     end
 
-    it "Can find the last rider from the CSV" do
-      last_rider = RideShare::Rider.find(300)
-      last_rider.must_be_instance_of RideShare::Rider
-      last_rider.rider_id.must_equal 300
-    end
-
-    it "outputs a message for a rider ID that doesn't exist" do
-      proc{
-        RideShare::Rider.find(983)
-      }.must_output (/.+/)
+    it "returns nil if ID does not exist" do
+    RideShare::Rider.find(98765).must_equal nil
     end
 
   end
 
-  describe "find_trips" do
-
-    it "finds trips associated with the rider's ID" do
-      rider_trips[0].trip_id.must_equal(127)
-    end
-
-    it "returns correct array length" do
+  describe "RideShare::Rider.find_trips" do
+   let(:rider_trips) { Rider.find_trips(54) }
+    it "returns array of trips associated with the rider's ID" do
+      rider_trips.must_be_instance_of Array
       rider_trips.length.must_equal 2
+      my_rider.find_trips.each do |trip|
+        trip.must_be_instance_of RideShare::Trip
+      end
     end
   end
 
