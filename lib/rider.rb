@@ -27,11 +27,11 @@ module RideShare
     return rider_lookup
   end
 
-  def self.find_trips(id)
+  def self.find_trips(rider_id)
     trips = RideShare::Trip.all
     rider_trips = []
     trips.each do |trip|
-      if trip.rider_id == id
+      if trip.rider_id == rider_id
         rider_trips.push(trip)
       end
     end

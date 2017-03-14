@@ -20,24 +20,24 @@ module RideShare
       CSV.foreach("support/drivers.csv", {:headers => true}) do |line|
         @drivers << self.new({driver_id:line[0].to_i, name:line[1], vin:line[2]})
       end
-      return @drivers
+      @drivers
     end
 
     def self.find(id)
-      drivers_lookup = Driver.all.find { |driver| driver.driver_id == id }
-      return drivers_lookup
+      self.all.find { |driver| driver.driver_id == id }
     end
 
-    def find_trips
-      RideShare::Trips.get_trips_by_driver_id(@driver_id)
+    def self.find_trips(id)
+      RideShare::Trip.all.select { |trip| trip.driver_id == id }
     end
 
-    def average_rating
+    def self.average_rating(id)
       total_rating = 0.0
-      find_trips.each do |trip|
+      trips = find_trips(id)
+      trips.each do |trip|
         total_rating += trip.rating
       end
-      average_rating = total_rating/find_trips.length
+      total_rating/trips.length
     end
   end
 end
