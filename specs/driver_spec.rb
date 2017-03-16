@@ -36,7 +36,7 @@ describe "RideShare::Driver" do
     end
 
     it "raises a Argumenterror if the VIN is not 17 characters" do
-      assert_raises(ArgumentError) {bad_driver}
+      proc {bad_driver}.must_raise ArgumentError
     end
 
   end
