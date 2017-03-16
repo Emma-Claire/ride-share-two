@@ -4,7 +4,7 @@ describe "RideShare::Driver" do
 
   let(:new_driver) {RideShare::Driver.new({driver_id: 123, name: 'Zane Alexander', vin: '12345678901234567'})}
 
-  let(:driver_trips) {RideShare::Driver.find(1)}
+  let(:driver_trips) {RideShare::Driver.find(1).find_trips}
 
   describe "Driver#initialize" do
 
@@ -15,7 +15,7 @@ describe "RideShare::Driver" do
       vin = '12345678901234567'
 
       new_driver.must_respond_to :driver_id
-      new_driver.id.must_equal id
+      new_driver.driver_id.must_equal driver_id
       new_driver.must_respond_to :name
       new_driver.name.must_equal name
       new_driver.must_respond_to :vin
@@ -107,7 +107,8 @@ describe "RideShare::Driver" do
   describe "average_rating" do
 
     it "returns the average rating of the driver" do
-      RideShare::Driver.average_rating.must_equal 28.0 / 8
+      average_rating = [3, 5, 4, 3, 2, 5, 2, 4]/average_rating.length
+      RideShare::Trip.average_rating.must_equal 28.0 / 8
     end
   end
 

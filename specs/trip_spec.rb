@@ -68,7 +68,7 @@ describe "RideShare::Trip" do
       RideShare::Trip.all[-1].driver_id.must_equal(61)
       RideShare::Trip.all[-1].rider_id.must_equal(168)
       RideShare::Trip.all[-1].date.must_equal('2016-04-25')
-      RideShare::Trip.all[-1].rating.must_equal(3)
+      RideShare::Trip.all[ -1].rating.must_equal(3)
     end
 
     it "returns an array of trips from the csv" do

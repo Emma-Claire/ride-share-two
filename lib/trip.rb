@@ -21,6 +21,9 @@ module RideShare
       return trips
     end
 
+    def get_trips_by_driver_id
+    end
+
     def self.find(trip_id)
       trips = Trip.all
       return trips.find {|trip| trip.trip_id == trip_id}

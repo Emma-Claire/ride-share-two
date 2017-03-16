@@ -29,7 +29,7 @@ module RideShare
     end
 
     def find_trips
-      RideShare::Trips.get_trips_by_driver_id(@driver_id)
+      RideShare::Trip.get_trips_by_driver_id(@driver_id)
     end
 
     def average_rating

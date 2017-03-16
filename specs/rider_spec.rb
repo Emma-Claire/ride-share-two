@@ -50,25 +50,26 @@ describe "RideShare::Rider" do
 
   describe "self.find" do
     it "Returns an existing rider" do
-      existing_rider = RideShare::Rider.find(86)
-      existing_rider.must_be_kind_of RideShare::Rider
+
+       my_rider.must_be_kind_of RideShare::Rider
+       my_rider.rider_id.must_equal 86
+
     end
 
     it "Can find the first rider from the CSV" do
-      first_rider = RideShare::Rider.find(1)
-      first_rider.must_be_instance_of RideShare::Rider
-      first_rider.rider_id.must_equal 1
+
+      my_rider.must_be_instance_of RideShare::Rider
+      my_rider.rider_id.must_equal 1
     end
 
     it "Can find the last rider from the CSV" do
-      last_rider = RideShare::Rider.find(300)
-      last_rider.must_be_instance_of RideShare::Rider
-      last_rider.rider_id.must_equal 300
+      my_rider.must_be_instance_of RideShare::Rider
+      my_rider.rider_id.must_equal 300
     end
   end
 
   describe "RideShare::Rider.find_trips" do
-    let(:rider_trips) { RideShare::Rider.find_trips(54) }
+    let(:rider_trips) { RideShare::Trip.rider_id(54).find_trips }
     it "returns array of trips associated with the rider's ID" do
       rider_trips.must_be_instance_of Array
       rider_trips.length.must_equal 2

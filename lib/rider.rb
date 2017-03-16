@@ -27,7 +27,7 @@ module RideShare
     return rider_lookup
   end
 
-  def self.find_trips(id)
+  def find_trips(id)
     trips = RideShare::Trip.all
     rider_trips = []
     trips.each do |trip|
