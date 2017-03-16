@@ -35,9 +35,9 @@ describe "RideShare::Driver" do
       new_driver.vin.length.must_equal 17
     end
 
-    # it "raises a Argumenterror if the VIN is not 17 characters in length" do
-    #   bad_driver.raise_error
-    # end
+    it "raises a Argumenterror if the VIN is not 17 characters" do
+      assert_raises(ArgumentError) {bad_driver}
+    end
 
   end
 
